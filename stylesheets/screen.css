@@ -66,3 +66,54 @@ a img {
 article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
   display: block;
 }
+
+/*Mixins */
+/* Pre-set Styles */
+/* line 19, ../sass/screen.scss */
+.titleStyle1, .textTestWindow .rowTitle {
+  font-weight: bold;
+  font-size: 1em;
+}
+
+/* line 24, ../sass/screen.scss */
+.genBtn1, .textTestWindow .checkBtn {
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  border-radius: 8px;
+  background-color: #cdcdcd;
+  width: 100px;
+  text-align: center;
+  padding: 12px;
+  margin: auto;
+}
+
+/* line 33, ../sass/screen.scss */
+.containerStyle1, .textTestWindow .rowContainer {
+  border: 1px solid black;
+  padding: 20px;
+}
+
+/* line 40, ../sass/screen.scss */
+.textTestWindow {
+  max-width: 60%;
+  margin: auto;
+}
+/* line 44, ../sass/screen.scss */
+.textTestWindow .rowContainer {
+  margin: auto;
+  width: 80%;
+}
+/* line 54, ../sass/screen.scss */
+.textTestWindow .checkBtn {
+  background-color: #ccc;
+}
+/* line 60, ../sass/screen.scss */
+.textTestWindow .textZone {
+  /* Text Bay 1 */
+}
+/* line 62, ../sass/screen.scss */
+.textTestWindow .textZone .textBay1 {
+  width: 100%;
+  margin: 10 0px;
+}

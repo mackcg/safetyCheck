@@ -11,9 +11,6 @@
 
 <body>
 	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
-
-
 
 	<div class="elWrapper">
 		<div class="textTestWindow">
@@ -21,27 +18,89 @@
 				<div class="rowTitle">
 					Phone Number
 				</div>
+				<div class="warnings"></div>
 				<div class="rowInput">
 					<label for="tel1">Tel:</label>
-					<input type="text" name="telIn1" id="tel1" placeholder="809-099-2839"/>
+					<input type="text" name="telIn1" class="inputBox1" id="tel1" placeholder="809-099-2839"/> <span class="validPhone">Not valid</span>
 				</div>
 			</div>
 			<br>
 			<br>
 			<div class="rowContainer">
-				<div class="rowTitle">Insert Text you'd like to Check in the text box below</div>
+				<div class="rowTitle">Check for Social or CC - Then warn user.</div>
 				<br>
-				<textarea name="textBay1" class="textBay1" id="" cols="30" rows="10">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id vel dolore placeat nostrum doloremque nam, quisquam iste? Nostrum magni animi repellat nobis veniam incidunt iure qui maxime, ipsa dolore quod ad nulla, hic tempora cupiditate, adipisci distinctio! Labore autem, ipsam! 310-83-1093 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident quas doloremque maxime, fugiat quibusdam, in quo, molestias, atque veritatis labore repudiandae quis laborum ea eveniet sequi quos nulla placeat deleniti?
-				</textarea>
-				<div class="mAuto">
-					<div class="checkBtn">
-						Run Check
+				<div class="warnings"></div>
+				<div class="textZone">
+					<textarea name="textBay1" class="textBay1" id="" cols="30" rows="10">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id vel dolore placeat nostrum doloremque nam, quisquam iste? Nostrum magni animi repellat nobis veniam incidunt iure qui maxime, ipsa dolore quod ad nulla, hic tempora cupiditate, adipisci distinctio! Labore autem, ipsam! 310-83-1093 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident quas doloremque maxime, fugiat quibusdam, in quo, molestias, atque veritatis labore repudiandae quis laborum ea eveniet sequi quos nulla placeat deleniti?
+					</textarea>
+					<br>
+					<div class="mAuto">
+						<div class="checkBtn">
+							Run Check
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<script>
+		var textBay1 = $('.textBay1').val();
+		var inputBox1 = $('.inputBox1').val();
+		//Capture basic social security
+		var socRegStr = /\d{3}-?\d{2}-?\d{4}/;
+		//Capture CC with dash conditional
+		var ccRegStr = /\d{4}-?\d{4}-?\d{4}-?\d{4}/;
+
+		  var socReg = new RegExp(socRegStr);
+		  var ccReg = new RegExp(socRegStr);
+
+		  $('.checkBtn').click(function(ev){
+		  	var fields = [{text:textBay1, targ:'.textBay1'},{text:inputBox1, targ:'.inputBox1'}]
+		  	$.each(fields, function(ind,val){
+		  		mack.safteyCheck(val.text, $(val.targ))
+		  	})
+		  		
+		  })
+		
+
+
+		var mack = {};
+		mack.safteyCheck = function(text,target){
+			//Runs the regex on the string
+			var checkSoc = text.match(socReg);
+			var checkCC = text.match(ccReg);
+
+			//Check for known elements
+			if(checkSoc){
+				mack.social = true;
+				console.log('uh oh');
+			} else {
+				mack.social = false;
+			}
+
+			if(checkCC) {
+				mack.cc = true;
+				console.log('');
+			} else {
+				mack.cc = false;
+			}
+
+			mack.showWarning(target);
+
+		}
+
+		mack.showWarning = function(){
+			if(mack.social){
+
+			}
+			
+		}
+
+		$(function(){
+			console.log('ready')
+
+		})
+
 	</script>
 
 </body>

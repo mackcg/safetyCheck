@@ -5,3 +5,66 @@
 
 @import "compass/reset";
 
+/*Mixins */
+
+	@mixin border-radius($radius) {
+	  -webkit-border-radius: $radius;
+	     -moz-border-radius: $radius;
+	      -ms-border-radius: $radius;
+	          border-radius: $radius;
+	}
+
+	/* Pre-set Styles */
+
+	.titleStyle1 {
+			font-weight: bold;
+			font-size: 1em;	
+	}
+
+	.genBtn1 {
+		@include border-radius(8px);
+		background-color: #cdcdcd;
+		width: 100px;
+		text-align: center;
+		padding: 12px;
+		margin: auto;
+	}
+
+	.containerStyle1 {
+		border:1px solid black;
+		padding: 20px;
+
+	}
+
+
+	.textTestWindow{
+		max-width:60%;
+		margin: auto;
+
+		.rowContainer {
+			@extend .containerStyle1;
+			margin: auto;
+			width: 80%;
+		}
+
+		.rowTitle {
+			@extend .titleStyle1;
+		}
+
+		.checkBtn {
+			@extend .genBtn1;
+			background-color: #ccc;
+
+		}
+
+		.textZone{
+			/* Text Bay 1 */
+			.textBay1 {
+				width: 100%;
+				margin:10 0px;
+			}
+
+
+		}
+
+	}
