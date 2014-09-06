@@ -16,12 +16,13 @@
 		<div class="textTestWindow">
 			<div class="rowContainer">
 				<div class="rowTitle">
-					Phone Number
+					Tel Number
 				</div>
-				<div class="warnings"></div>
+				<div class="warnings">
+				</div>
 				<div class="rowInput">
 					<label for="tel1">Tel:</label>
-					<input type="text" name="telIn1" class="inputBox1" id="tel1" placeholder="809-099-2839"/> <span class="validPhone">Not valid</span>
+					<input type="text" name="telIn1" class="inputBox1" id="tel1" placeholder="8009-0099-2839"/> <span style="display:none" class="validPhone">Not valid</span>
 				</div>
 			</div>
 			<br>
@@ -31,7 +32,7 @@
 				<br>
 				<div class="warnings"></div>
 				<div class="textZone">
-					<textarea name="textBay1" class="textBay1" id="" cols="30" rows="10">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id vel dolore placeat nostrum doloremque nam, quisquam iste? Nostrum magni animi repellat nobis veniam incidunt iure qui maxime, ipsa dolore quod ad nulla, hic tempora cupiditate, adipisci distinctio! Labore autem, ipsam! 310-83-1093 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident quas doloremque maxime, fugiat quibusdam, in quo, molestias, atque veritatis labore repudiandae quis laborum ea eveniet sequi quos nulla placeat deleniti?
+					<textarea name="textBay1" class="textBay1" id="" cols="30" rows="10">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id vel dolore placeat nostrum doloremque nam, quisquam iste? Nostrum magni animi repellat nobis veniam incidunt iure qui maxime, ipsa dolore quod ad nulla, hic tempora cupiditate, adipisci distinctio! Labore autem, ipsam! 310-83-1093 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident quas doloremque maxime, fugiat quibusdam, in quo, molestias, atque veritatis labore repudiandae quis laborum ea eveniet sequi quos nulla placeat deleniti? 1203-4356-3956-9345
 					</textarea>
 					<br>
 					<div class="mAuto">
@@ -48,37 +49,49 @@
 		// Assign variables to individual input elements
 		var textBay1 = $('.textBay1').val();
 		var inputBox1 = $('.inputBox1').val();
+		var warning;
 		// list all fields to be checked
-		var fields = [{txt:textBay1, targ:'.textBay1'},{txt:inputBox1, targ:'.inputBox1'}]
+		var fields = [];
 		//Capture basic social security
 		var socRegStr = /\d{3}-?\d{2}-?\d{4}/;
 		//Capture CC with dash conditional
-		var ccRegStr = /\d{4}-?\d{4}-?\d{4}-?\d{4}/;
+		var ccRegStrDash = /\d{4}-?\d{4}-?\d{4}-?\d{4}/;
+		var ccRegStr = /^[0-9]{16}$/;
 
 		  var socReg = new RegExp(socRegStr);
-		  var ccReg = new RegExp(socRegStr);
+		  var ccReg = new RegExp(ccRegStr);
+		  var ccRegDash = new RegExp(ccRegStrDash);
 
 		  $('.checkBtn').click(function(ev){
-		  	
+		  	ev.stopPropagation();
+		  	fields = [{txt:textBay1, targ:'.textBay1'},{txt: $('.inputBox1').val(), targ:'.inputBox1'}]
+		  	//Clear Warnings
+		  	$('.warnings').html('')
+
+
 		  	$.each(fields, function(ind,val){
 		  		/*console.log(val.txt)*/
-		  		mack.safteyCheck(val.txt, $(val.targ))
+		  		mack.safteyCheck(val.txt, val.targ)
 		  	})
 		  		
 		  })
 		
 
 
-		var mack = {};
+		var mack = {social:'',cc:''};
 		mack.safteyCheck = function(txt,target){
 			//Runs the regex on the string
+			console.log(txt)
 			var checkSoc = txt.match(socReg);
-			var checkCC = txt.match(ccReg);
+			var checkCC = txt.match(ccRegDash);
 
+			/*$('.warnings').html('')*/
 			//Check for known elements
 			if(checkSoc){
 				mack.social = true;
+				console.log(target)
 				console.log('Warning, social Detected');
+				$(target).closest('.rowContainer').find('.warnings').html('Warning, Social Security Detected')
 			} else {
 				mack.social = false;
 			}
@@ -86,20 +99,15 @@
 			if(checkCC) {
 				mack.cc = true;
 				console.log('Warning CC Detected');
+				$(target).closest('.rowContainer').find('.warnings').append('<br>Warning, CC Detected');
 			} else {
 				mack.cc = false;
 			}
 
-			mack.showWarning(target);
-
-		}
-
-		mack.showWarning = function(){
-			if(mack.social){
-
-			}
 			
 		}
+
+
 
 		$(function(){
 			console.log('ready')
