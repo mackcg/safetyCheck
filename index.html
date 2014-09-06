@@ -14,21 +14,23 @@
 
 	<div class="elWrapper">
 		<div class="textTestWindow">
+			<form class="textCheck" action="#">
 			<div class="rowContainer">
 				<div class="rowTitle">
 					Tel Number
 				</div>
+				<h4>Updates on Blur...</h4>
 				<div class="warnings">
 				</div>
 				<div class="rowInput">
 					<label for="tel1">Tel:</label>
-					<input type="text" name="telIn1" class="inputBox1" id="tel1" placeholder="8009-0099-2839"/> <span style="display:none" class="validPhone">Not valid</span>
+					<input type="tel" name="telIn1" class="inputBox1" id="tel1" placeholder="8009-0099-2839" required/> <span style="display:none" class="validPhone">Not valid</span>
 				</div>
 			</div>
 			<br>
 			<br>
 			<div class="rowContainer">
-				<div class="rowTitle">Check for Social or CC - Then warn user.</div>
+				<div class="rowTitle">Check For Social or CC# - Then warn user.</div>
 				<br>
 				<div class="warnings"></div>
 				<div class="textZone">
@@ -42,6 +44,7 @@
 					</div>
 				</div>
 			</div>
+			</form>
 		</div>
 	</div>
 	<script>
@@ -62,13 +65,34 @@
 		  var ccReg = new RegExp(ccRegStr);
 		  var ccRegDash = new RegExp(ccRegStrDash);
 
+		  // Assign OnBlur updates to fields
+		  //Consider Itterating through.
+		  $('.inputBox1').on('blur', function(ev){
+
+		  		ev.stopPropagation();
+		  		$('.inputBox1').closest('.rowContainer').find('.warnings').html('');
+		  		mack.safteyCheck($('.inputBox1').val(), '.inputBox1')
+
+		  })
+		  $('.textBay1').on('blur', function(ev){
+
+		  		ev.stopPropagation();
+		  		$('.textBay1').closest('.rowContainer').find('.warnings').html('');
+		  		mack.safteyCheck($('.textBay1').val(), '.textBay1')
+
+		  })
+
+		  // Check button function to display text and itterate through fields assigned to array
+
 		  $('.checkBtn').click(function(ev){
 		  	ev.stopPropagation();
-		  	fields = [{txt:textBay1, targ:'.textBay1'},{txt: $('.inputBox1').val(), targ:'.inputBox1'}]
+		  	fields = [{txt:$('.textBay1').val(), targ:'.textBay1'},{txt: $('.inputBox1').val(), targ:'.inputBox1'}]
 		  	//Clear Warnings
 		  	$('.warnings').html('')
 
-
+		  	$('.textCheck').submit(function(ev){
+		  		ev.preventDefault();
+		  	})
 		  	$.each(fields, function(ind,val){
 		  		/*console.log(val.txt)*/
 		  		mack.safteyCheck(val.txt, val.targ)
@@ -85,13 +109,12 @@
 			var checkSoc = txt.match(socReg);
 			var checkCC = txt.match(ccRegDash);
 
-			/*$('.warnings').html('')*/
-			//Check for known elements
+			//Check for known elements and display custom warnings
 			if(checkSoc){
 				mack.social = true;
 				console.log(target)
 				console.log('Warning, social Detected');
-				$(target).closest('.rowContainer').find('.warnings').html('Warning, Social Security Detected')
+				$(target).closest('.rowContainer').find('.warnings').html('<div class="warning">Warning, Social Security Detected!</div>')
 			} else {
 				mack.social = false;
 			}
@@ -99,7 +122,7 @@
 			if(checkCC) {
 				mack.cc = true;
 				console.log('Warning CC Detected');
-				$(target).closest('.rowContainer').find('.warnings').append('<br>Warning, CC Detected');
+				$(target).closest('.rowContainer').find('.warnings').append('<div class="warning">Warning, CC Detected!</div>');
 			} else {
 				mack.cc = false;
 			}

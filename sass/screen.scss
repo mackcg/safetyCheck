@@ -20,6 +20,18 @@
 			font-weight: bold;
 			font-size: 1em;	
 	}
+	.titleStyle2 {
+		@include border-radius(6px);
+		background-color: #cdcdcd;
+		color: white;
+		padding: 5px;
+	}
+	.titleStyle3 {
+		@include border-radius(3px);
+		background-color: #004eb0;
+		color: white;
+		padding: 5px;
+	}
 
 	.genBtn1 {
 		@include border-radius(8px);
@@ -37,19 +49,44 @@
 
 	}
 
+	/* Test Window Container*/
+
 
 	.textTestWindow{
 		max-width:60%;
 		margin: auto;
+		position: relative;
+		top: 20px;
+		padding-bottom: 20px;
 
 		.rowContainer {
 			@extend .containerStyle1;
+			@include border-radius(8px);
 			margin: auto;
 			width: 80%;
+			background: #f4f4f4;
 		}
 
 		.rowTitle {
 			@extend .titleStyle1;
+		}
+
+		.warnings {
+			@extend .titleStyle2;
+			font-size: 14px;
+			margin:4px;
+
+			.warning {
+				margin:4px;
+				@extend .titleStyle3;
+
+			}
+		}
+
+		.inputBox1 {
+			padding: 4px;
+			width: 50%;
+			min-width: 150px;
 		}
 
 		.checkBtn {

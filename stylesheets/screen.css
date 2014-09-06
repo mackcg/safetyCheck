@@ -75,7 +75,29 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   font-size: 1em;
 }
 
-/* line 24, ../sass/screen.scss */
+/* line 23, ../sass/screen.scss */
+.titleStyle2, .textTestWindow .warnings {
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  border-radius: 6px;
+  background-color: #cdcdcd;
+  color: white;
+  padding: 5px;
+}
+
+/* line 29, ../sass/screen.scss */
+.titleStyle3, .textTestWindow .warnings .warning {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #004eb0;
+  color: white;
+  padding: 5px;
+}
+
+/* line 36, ../sass/screen.scss */
 .genBtn1, .textTestWindow .checkBtn {
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
@@ -89,31 +111,55 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   cursor: pointer;
 }
 
-/* line 34, ../sass/screen.scss */
+/* line 46, ../sass/screen.scss */
 .containerStyle1, .textTestWindow .rowContainer {
   border: 1px solid black;
   padding: 20px;
 }
 
-/* line 41, ../sass/screen.scss */
+/* Test Window Container*/
+/* line 55, ../sass/screen.scss */
 .textTestWindow {
   max-width: 60%;
   margin: auto;
+  position: relative;
+  top: 20px;
+  padding-bottom: 20px;
 }
-/* line 45, ../sass/screen.scss */
+/* line 62, ../sass/screen.scss */
 .textTestWindow .rowContainer {
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  border-radius: 8px;
   margin: auto;
   width: 80%;
+  background: #f4f4f4;
 }
-/* line 55, ../sass/screen.scss */
+/* line 74, ../sass/screen.scss */
+.textTestWindow .warnings {
+  font-size: 14px;
+  margin: 4px;
+}
+/* line 79, ../sass/screen.scss */
+.textTestWindow .warnings .warning {
+  margin: 4px;
+}
+/* line 86, ../sass/screen.scss */
+.textTestWindow .inputBox1 {
+  padding: 4px;
+  width: 50%;
+  min-width: 150px;
+}
+/* line 92, ../sass/screen.scss */
 .textTestWindow .checkBtn {
   background-color: #ccc;
 }
-/* line 61, ../sass/screen.scss */
+/* line 98, ../sass/screen.scss */
 .textTestWindow .textZone {
   /* Text Bay 1 */
 }
-/* line 63, ../sass/screen.scss */
+/* line 100, ../sass/screen.scss */
 .textTestWindow .textZone .textBay1 {
   width: 100%;
   margin: 10 0px;
