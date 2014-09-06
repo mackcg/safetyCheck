@@ -44,8 +44,12 @@
 		</div>
 	</div>
 	<script>
+	
+		// Assign variables to individual input elements
 		var textBay1 = $('.textBay1').val();
 		var inputBox1 = $('.inputBox1').val();
+		// list all fields to be checked
+		var fields = [{txt:textBay1, targ:'.textBay1'},{txt:inputBox1, targ:'.inputBox1'}]
 		//Capture basic social security
 		var socRegStr = /\d{3}-?\d{2}-?\d{4}/;
 		//Capture CC with dash conditional
@@ -55,9 +59,10 @@
 		  var ccReg = new RegExp(socRegStr);
 
 		  $('.checkBtn').click(function(ev){
-		  	var fields = [{text:textBay1, targ:'.textBay1'},{text:inputBox1, targ:'.inputBox1'}]
+		  	
 		  	$.each(fields, function(ind,val){
-		  		mack.safteyCheck(val.text, $(val.targ))
+		  		/*console.log(val.txt)*/
+		  		mack.safteyCheck(val.txt, $(val.targ))
 		  	})
 		  		
 		  })
@@ -65,22 +70,22 @@
 
 
 		var mack = {};
-		mack.safteyCheck = function(text,target){
+		mack.safteyCheck = function(txt,target){
 			//Runs the regex on the string
-			var checkSoc = text.match(socReg);
-			var checkCC = text.match(ccReg);
+			var checkSoc = txt.match(socReg);
+			var checkCC = txt.match(ccReg);
 
 			//Check for known elements
 			if(checkSoc){
 				mack.social = true;
-				console.log('uh oh');
+				console.log('Warning, social Detected');
 			} else {
 				mack.social = false;
 			}
 
 			if(checkCC) {
 				mack.cc = true;
-				console.log('');
+				console.log('Warning CC Detected');
 			} else {
 				mack.cc = false;
 			}
